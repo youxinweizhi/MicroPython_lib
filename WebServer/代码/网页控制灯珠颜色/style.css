@@ -1,0 +1,138 @@
+.colorpicker {
+  position: relative;
+  background: #000;
+  width: 240px;
+  padding-left: 8px;
+  box-shadow: 0 16px 32px -2px rgba(0, 0, 0, 0.24);
+}
+.colorpicker .hue {
+  width: 8px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  -webkit-transform: translate(-100%, 0);
+          transform: translate(-100%, 0);
+  background: linear-gradient(to bottom, red 0, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, red);
+}
+.colorpicker .hue .drag {
+  --y: 0;
+  width: 8px;
+  height: 12px;
+  top: 1px;
+  right: 0;
+  position: absolute;
+  -webkit-transform: translate(0, var(--y));
+          transform: translate(0, var(--y));
+}
+.colorpicker .hue .drag:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 6px 6px 0;
+  border-color: transparent #000 transparent transparent;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+.colorpicker .field {
+  --backgroundHue: 150;
+  width: 100%;
+  padding-bottom: 112%;
+  position: relative;
+  background: hsl(var(--backgroundHue), 100%, 50%);
+}
+.colorpicker .field .fieldOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, #000), linear-gradient(to right, #fff, transparent);
+}
+.colorpicker .field .fieldOverlay .drag {
+  --x: 0;
+  --y: 0;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  left: -5px;
+  top: -5px;
+  border: 0.8px solid #fff;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
+  -webkit-transform: translate(var(--x), var(--y));
+          transform: translate(var(--x), var(--y));
+}
+.colorpicker input {
+  background: none;
+  outline: none;
+  border: none;
+  font-family: inherit;
+  padding: 0;
+  display: table;
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  font-size: 16px;
+  margin: 12px 0 0 0;
+}
+.colorpicker ul {
+  padding: 8% 16% 12% 16%;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+.colorpicker ul li {
+  font-size: 12px;
+  text-align: center;
+  min-width: 30px;
+  color: rgba(255, 255, 255, 0.4);
+}
+.colorpicker ul li strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: inherit;
+}
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Roboto, Arial;
+  color: #ADAFB6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+body .dribbble {
+  position: fixed;
+  display: block;
+  right: 20px;
+  bottom: 20px;
+  opacity: .5;
+  transition: all .4s ease;
+}
+body .dribbble:hover {
+  opacity: 1;
+}
+body .dribbble img {
+  display: block;
+  height: 36px;
+}
