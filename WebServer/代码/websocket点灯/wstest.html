@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <title>MicroWebSocket Test</title>
+    </head>
+
+    <script language="javascript">
+        var output;
+        function init()
+        {
+            output = document.getElementById("output");
+        }
+
+        function content() {
+            var wsUri           = "ws://"+document.getElementById('1').value;
+            writeToScreen("Connection to " + wsUri + "...");
+            websocket           = new WebSocket(wsUri);
+            websocket.onopen    = function(evt) { onOpen    (evt) };
+            websocket.onclose   = function(evt) { onClose   (evt) };
+            websocket.onmessage = function(evt) { onMessage (evt) };
+            websocket.onerror   = function(evt) { onError   (evt) };
+        }
+
+        function send() {
+            SendMsg(document.getElementById('2').value);
+
+        }
+
+        function onOpen(evt)
+        {
+            writeToScreen("<strong>-- CONNECTED --</strong>");
+            SendMsg("Hello world :)");
+            /*
+            setTimeout( function() { websocket.close() }, 500 )
+
+             */
+        }
+
+        function onClose(evt)
+        {
+            writeToScreen("<strong>-- DISCONNECTED --</strong>");
+        }
+
+        function onMessage(evt)
+        {
+            writeToScreen('MSG FROM SERVER : <span style="color: blue;">' + evt.data + '</span>');
+        }
+
+        function onError(evt)
+        {
+            writeToScreen('ERROR : <span style="color: red;">' + evt.data + '</span>');
+        }
+
+        function SendMsg(msg)
+        {
+            writeToScreen('MSG TO SERVER : <span style="color: green;">' + msg + '</span>');
+            websocket.send(msg);
+        }
+
+        function writeToScreen(s)
+        {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = s;
+            output.appendChild(pre);
+        }
+
+        window.addEventListener("load", init, false);
+
+    </script>
+
+    <body>
+      <h2>MicroWebSocket Test :</h2>
+      <input id='1' type=text value="192.168.5.168">
+      <button onclick='content()'>content</button>
+      <br>
+      <input id="2" type="text">
+      <button onclick='send()'>send</button>
+      <div id="output"></div>
+    </body>
+
+</html>
